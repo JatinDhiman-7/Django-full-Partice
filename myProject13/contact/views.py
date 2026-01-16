@@ -7,7 +7,7 @@ def contact_form(request):
 
 def submit_contact(request):
     if request.method=='POST':
-        name=request.POST.get('home')
+        name=request.POST.get('name')
         message=request.POST.get('message')
     
     if name and message:
