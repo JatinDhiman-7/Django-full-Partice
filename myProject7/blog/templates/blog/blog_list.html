@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#3 templates</title>
+</head>
+<body>
+    <h1>Blog List</h1>
+    <p>{{today}}</p>
+    {% comment %} If Else {% endcomment %}
+    {% if blogs.0.is_featured %}
+    <h1>Featured Blog: {{ blogs.0.title }}</h2>
+    {% else %}
+    <h2>No Featured Blog: {{ blogs.0.title }}</h2>
+    {% endif %}
+    </hr>
+    {% comment %} For Loop with If Condition {% endcomment %}
+    <ul>
+        {% for blog in blogs%}
+        <li>{{forloop.counter}}.{{blog.title}}-{{blog.author}}</li>
+        {% empty%}
+        <li>No blogs available.</li>
+        {% endfor%}
+    </ul>
+</hr>
+{% comment %} with for length {% endcomment %}
+{% with total_blogs=blogs|length%}
+<p>Total Blogs: {{total_blogs}}</p>
+{% endwith%}
+</hr>
+{% comment %} Cycle {% endcomment %}
+<h2>Blogs in Table</h2>
+<Table border="1" cellpadding="5" cellspacing="0">
+{% for blog in blogs%}
+<tr style="background-color:{% cycle 'lightblue' 'lightgreen' %}">
+<td>{{forloop.counter}}</td>
+<td>{{blog.title}}</td>
+<td>{{blog.author}}</td>
+
+</tr>
+{% endfor%}
+</Table>
+</hr>
+{% comment %} First of {% endcomment %}
+<p>Author: {% firstof blog.1.author "ABC" %}</p>
+</hr>
+{% comment %} verbatim {% endcomment %}
+{% verbatim%}
+<p>Author: {% firstof blog.1.author "ABC" %}</p>
+{% endverbatim%}
+</hr>
+{% comment %} autoescape {% endcomment %}
+{% autoescape on %}
+<p>autoescape:{{html_code}}</p>
+{% endautoescape %}
+</body>
+</html>

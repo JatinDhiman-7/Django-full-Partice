@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Portfolio</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %}
+  </head>
+  <body>
+    {% include 'includes/navbar.html'%}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% include 'includes/footer.html'%}
+  </body>
+</html>
