@@ -4,4 +4,10 @@ from . models import Student
 class StudentForm(forms.ModelForm):
     class Meta:
         model=Student
-        name=['name','age','email']
+        fields=['name','age','email']
+
+    def clean_age(self):
+        age=self.cleaned_data.get('age')
+        if age < 18:
+            raise forms.ValidationError("age must be greater than 18.")
+        return age
